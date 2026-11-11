@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function(){
     messages: document.getElementById('messages'),
     composer: document.getElementById('composer'),
     prompt: document.getElementById('prompt'),
-    sendBtn: document.getElementById('sendBtn')
+    sendBtn: document.getElementById('sendBtn'),
+    modelSelect: document.getElementById('modeloSelect')
   }
 
   const API_KEY = '';
@@ -33,5 +34,19 @@ document.addEventListener('DOMContentLoaded', function(){
     if(text){
       text = text.trim();
     }
+    if(!text){
+      return;
+    }
+
+    if(!API_KEY){
+      alert('Configura tu API Key');
+      return;
+    }
+
+    let model = elements.modelSelect.value;
+    if(!model){
+      model = DEFAULT_MODEL;
+    }
+
   })
 })
