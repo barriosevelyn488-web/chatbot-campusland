@@ -139,7 +139,14 @@ document.addEventListener('DOMContentLoaded', function(){
           }
           callback(null, text);
         } else {
-          callback('Error ' + xhr.status, null);
+          let errorMsg = 'HTTP ' + xhr.status;
+          try {
+            let errData = JSON.parse(xhr.responseText);
+            if (errData && errData.error && errData.error.message) {
+              errorMsg += ': ' + errData.error.message;
+            }
+          } catch (e) {}
+          callback(errorMsg, null);
         }
       }
     };
