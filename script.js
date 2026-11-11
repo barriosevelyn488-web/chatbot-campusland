@@ -111,4 +111,22 @@ document.addEventListener('DOMContentLoaded', function(){
   function scrollToBottom(){
     elements.messages.scrollTop = elements.messages.scrollHeight;
   }
+
+  function generateContent(apiKey, model, contents, callback){
+    let url = 'https://generativelanguage.googleapis.com/v1beta/models/' +
+    encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(apiKey);
+
+    let payload = { contents };
+
+    let xhr = new XMLHttpRequest();
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState === 4){
+        if(xhr.status >= 200 && xhr.status < 300 ){
+          let data;
+        }
+      }
+    }
+  }
 })
+
