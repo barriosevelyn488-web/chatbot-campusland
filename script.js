@@ -54,6 +54,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
     setSendingState(true);
 
-    generateContent
-  })
+    generateContent(API_KEY, model, conversation, function(error, replyText){
+      if(error){
+        appendMessage('model', 'Error:'+error, true);
+      }
+      else{
+        appendMessage('model', replyText, false);
+      }
+      setSendingState(false);
+    });
+  });
 })
