@@ -134,9 +134,17 @@ document.addEventListener('DOMContentLoaded', function(){
           }
 
           let text = '';
+          if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text) {
+            text = data.candidates[0].content.parts[0].text;
+          }
+          callback(null, text);
+        } else {
+          callback('Error ' + xhr.status, null);
         }
       }
     };
+
+    xhr.send(JSON.stringify(payload));
   }
 })
 
