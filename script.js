@@ -27,5 +27,11 @@ document.addEventListener('DOMContentLoaded', function(){
     elements.prompt.style.height = newHeight+'px';
   });
 
-  elements.composer.addEventListener('su')
+  elements.composer.addEventListener('submit', function(e){
+    e.preventDefault();
+    let text = elements.prompt.value;
+    if(text){
+      text = text.trim();
+    }
+  })
 })
