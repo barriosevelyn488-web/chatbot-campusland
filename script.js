@@ -111,4 +111,40 @@ document.addEventListener('DOMContentLoaded', function(){
   function scrollToBottom(){
     elements.messages.scrollTop = elements.messages.scrollHeight;
   }
+
+  function generateContent(apiKey, model, contents, callback){
+    let url = 'https://generativelanguage.googleapis.com/v1beta/models/' +
+    encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(apiKey);
+
+    let payload = { contents };
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          let data;
+          try {
+            data = JSON.parse(xhr.responseText);
+          } catch (e) {
+            callback('Respuesta no es JSON válido', null);
+            return;
+          }
+
+          let text = '';
+          if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text) {
+            text = data.candidates[0].content.parts[0].text;
+          }
+          callback(null, text);
+        } else {
+          callback('Error ' + xhr.status, null);
+        }
+      }
+    };
+
+    xhr.send(JSON.stringify(payload));
+  }
 })
+
