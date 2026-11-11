@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
     modelSelect: document.getElementById('modeloSelect')
   }
 
-  const API_KEY = '';
+  let API_KEY = localStorage.getItem('GEMINI_API_KEY') || '';
   const DEFAULT_MODEL = 'gemini-2.5-flash';
   let conversation = [];
 
@@ -36,6 +36,14 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     if(!text){
       return;
+    }
+
+    if(!API_KEY){
+      const enteredKey = prompt('Por favor ingresa tu API Key de Gemini:');
+      if(enteredKey && enteredKey.trim()){
+        API_KEY = enteredKey.trim();
+        localStorage.setItem('GEMINI_API_KEY', API_KEY);
+      }
     }
 
     if(!API_KEY){
