@@ -78,6 +78,37 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function renderMessages(errorIndex, isError){
     elements.messages.innerHTML = '';
-    
+    let i = 0;
+    while( i < conversation.length){
+      let msg = conversation[i];
+
+      let wrapper = document.createElement('div');
+      wrapper.className = 'message ' + (msg.role === 'user' ? 'user' : 'model');
+
+      let avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = msg.role === 'user' ? 'Tú' : 'G';
+
+      let bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      if(isError && i === errorIndex)
+        bubble.className += ' error';
+
+      let bubbleText = '';
+      if(msg && msg.parts && msg.parts[0] && msg.parts[0].text){
+        bubbleText = msg.parts[0].text;
+      }
+      bubble.textContent = bubbleText;
+
+      wrapper.appendChild(avatar);
+      wrapper.appendChild(bubble);
+      elements.messages.appendChild(wrapper);
+
+      i++;
+    }
+  }
+
+  function scrollToBottom(){
+    elements.messages.scrollTop = elements.messages.scrollHeight;
   }
 })
