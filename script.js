@@ -48,5 +48,12 @@ document.addEventListener('DOMContentLoaded', function(){
       model = DEFAULT_MODEL;
     }
 
+    appendMessage('user', text, false);
+    elements.prompt.value = '';
+    elements.prompt.style.height = 'auto';
+
+    setSendingState(true);
+
+    generateContent
   })
 })
