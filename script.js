@@ -17,4 +17,13 @@ document.addEventListener('DOMContentLoaded', function(){
     conversation = [];
     renderMessages();
   });
+
+  elements.prompt.addEventListener('input', function(){
+    elements.prompt.style.height = 'auto';
+    let newHeight = elements.prompt.scrollHeight;
+    if(newHeight > 200){
+      newHeight = 200;
+    }
+    elements.prompt.style.height = newHeight+'px';
+  })
 })
