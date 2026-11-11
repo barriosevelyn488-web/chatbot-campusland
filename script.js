@@ -64,4 +64,20 @@ document.addEventListener('DOMContentLoaded', function(){
       setSendingState(false);
     });
   });
+
+  function setSendingState(isSending){
+    elements.sendBtn.disabled = isSending;
+    elements.prompt.disabled = isSending;
+  }
+
+  function appendMessage( role, text, isError ){
+    conversation.push({ role, parts: [{ text }]});
+    renderMessages(isError ? (conversation.length - 1) : null, isError);
+    scrollToBottom();
+  }
+
+  function renderMessages(errorIndex, isError){
+    elements.messages.innerHTML = '';
+    
+  }
 })
