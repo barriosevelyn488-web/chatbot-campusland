@@ -119,14 +119,24 @@ document.addEventListener('DOMContentLoaded', function(){
     let payload = { contents };
 
     let xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function(){
-      if(xhr.readyState === 4){
-        if(xhr.status >= 200 && xhr.status < 300 ){
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300) {
           let data;
+          try {
+            data = JSON.parse(xhr.responseText);
+          } catch (e) {
+            callback('Respuesta no es JSON válido', null);
+            return;
+          }
+
+          let text = '';
         }
       }
-    }
+    };
   }
 })
 
