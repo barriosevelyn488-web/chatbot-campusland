@@ -25,5 +25,7 @@ document.addEventListener('DOMContentLoaded', function(){
       newHeight = 200;
     }
     elements.prompt.style.height = newHeight+'px';
-  })
+  });
+
+  elements.composer.addEventListener('su')
 })
